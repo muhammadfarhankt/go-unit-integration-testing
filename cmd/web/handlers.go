@@ -97,7 +97,6 @@ func (app *application) Login(w http.ResponseWriter, r *http.Request) {
 	// prevent fixation attack
 	_ = app.Session.RenewToken(r.Context())
 
-
 	// redirect to some other page
 	app.Session.Put(r.Context(), "flash", "Successfully logged in!")
 	http.Redirect(w, r, "/user/profile", http.StatusSeeOther)
@@ -107,7 +106,7 @@ func (app *application) authenticate(r *http.Request, user *data.User, password 
 	if valid, err := user.PasswordMatches(password); err != nil || !valid {
 		return false
 	}
-	
+
 	app.Session.Put(r.Context(), "user", user)
 	return true
 }
