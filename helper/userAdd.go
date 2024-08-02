@@ -8,7 +8,6 @@ import (
 
 func UserAdd() {
 	database.Db.Exec("DELETE FROM users")
-
 	test := model.User{
 		Name:     "Correct",
 		Email:    "correct@gmail.com",
