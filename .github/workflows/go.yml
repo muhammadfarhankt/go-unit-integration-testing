@@ -32,14 +32,20 @@ jobs:
     steps:
     - name: Deploy to EC2
       env:
-        EC2_HOST: ${{ secrets.AWS_EC2_HOST }}
-        EC2_USER: ${{ secrets.AWS_EC2_USER }}
+        # EC2_HOST: ${{ secrets.AWS_EC2_HOST }}
+        # EC2_USER: ${{ secrets.AWS_EC2_USER }}
         EC2_KEY: ${{ secrets.AWS_EC2_KEY }}
       run: |
-        echo "${EC2_KEY}" > key.pem
-        chmod 600 key.pem
-        scp -o StrictHostKeyChecking=no -i key.pem -r ./* ${EC2_USER}@${EC2_HOST}:/home/${EC2_USER}/app
-        ssh -o StrictHostKeyChecking=no -i key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
+
+        mkdir -p ~/.ssh
+        echo "${EC2_KEY}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan ec2-65-0-92-201.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+        ssh -i "~/.ssh/id_rsa" ubuntu@ec2-65-0-92-201.ap-south-1.compute.amazonaws.com << 'EOF'
+        # echo "${EC2_KEY}" > key.pem
+        # chmod 600 key.pem
+        # scp -o StrictHostKeyChecking=no -i key.pem -r ./* ${EC2_USER}@${EC2_HOST}:/home/${EC2_USER}/app
+        # ssh -o StrictHostKeyChecking=no -i key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
         cd go-unit-integration-testing/
         pkill -f userApiTest || true
         git pull
