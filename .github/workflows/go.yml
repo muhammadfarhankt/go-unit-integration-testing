@@ -40,8 +40,8 @@ jobs:
         mkdir -p ~/.ssh
         echo "${EC2_KEY}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan ec2-43-205-254-181.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
-        ssh -i "~/.ssh/id_rsa" ubuntu@ec2-43-205-254-181.ap-south-1.compute.amazonaws.com << 'EOF'
+        ssh-keyscan ec2-34-207-53-0.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+        ssh -i "~/.ssh/id_rsa" ubuntu@ec2-34-207-53-0.compute-1.amazonaws.com << 'EOF'
         # sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
         # export PATH=$PATH:/usr/local/go/bin
         # source ~/.profile  # or ~/.bashrc or ~/.zshrc
