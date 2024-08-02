@@ -40,12 +40,10 @@ jobs:
         chmod 600 key.pem
         scp -o StrictHostKeyChecking=no -i key.pem -r ./* ${EC2_USER}@${EC2_HOST}:/home/${EC2_USER}/app
         ssh -o StrictHostKeyChecking=no -i key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
-          sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
-          export PATH=$PATH:/usr/local/go/bin
-          source ~/.profile  # or ~/.bashrc or ~/.zshrc
-          cd user-APi-Testing
-          killall user-APi-Testing
-          git pull
-          go run main.go
-          exit
+        cd go-unit-integration-testing/
+        pkill -f userApiTest || true
+        git pull
+        go build
+        nohup ./userApiTest > app.log 2>&1 &
+        exit
         EOF
