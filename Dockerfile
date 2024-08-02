@@ -17,21 +17,21 @@ COPY . .
 RUN go build -o main .
 
 # Use the official PostgreSQL image as the base image
-FROM postgres:14.5
+# FROM postgres:14.5
 
-# Set the environment variables for the PostgreSQL container
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=postgres
-ENV POSTGRES_DB=users
+# # Set the environment variables for the PostgreSQL container
+# ENV POSTGRES_USER=postgres
+# ENV POSTGRES_PASSWORD=postgres
+# ENV POSTGRES_DB=users
 
-# Create a directory for the PostgreSQL data
-RUN mkdir /var/lib/postgresql/data
+# # Create a directory for the PostgreSQL data
+# RUN mkdir /var/lib/postgresql/data
 
-# Copy the SQL file into the container
-COPY sql/users.sql /docker-entrypoint-initdb.d/create_tables.sql
+# # Copy the SQL file into the container
+# COPY sql/users.sql /docker-entrypoint-initdb.d/create_tables.sql
 
 # Expose the PostgreSQL port
-EXPOSE 5432
+# EXPOSE 5432
 
 # Start the PostgreSQL service
 # CMD ["postgres"]
@@ -40,4 +40,4 @@ EXPOSE 5432
 EXPOSE 80
 
 # Command to run the executable
-CMD ["postgres", "/app/main"]
+CMD ["/app/main"]
