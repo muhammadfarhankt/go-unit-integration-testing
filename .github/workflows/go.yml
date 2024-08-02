@@ -40,11 +40,11 @@ jobs:
         mkdir -p ~/.ssh
         echo "${EC2_KEY}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan ec2-65-0-92-201.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
-        ssh -i "~/.ssh/id_rsa" ubuntu@ec2-65-0-92-201.ap-south-1.compute.amazonaws.com << 'EOF'
-        sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
-        export PATH=$PATH:/usr/local/go/bin
-        source ~/.profile  # or ~/.bashrc or ~/.zshrc
+        ssh-keyscan ec2-43-205-254-181.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+        ssh -i "~/.ssh/id_rsa" ubuntu@ec2-43-205-254-181.ap-south-1.compute.amazonaws.com << 'EOF'
+        # sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
+        # export PATH=$PATH:/usr/local/go/bin
+        # source ~/.profile  # or ~/.bashrc or ~/.zshrc
         # echo "${EC2_KEY}" > key.pem
         # chmod 600 key.pem
         # scp -o StrictHostKeyChecking=no -i key.pem -r ./* ${EC2_USER}@${EC2_HOST}:/home/${EC2_USER}/app
